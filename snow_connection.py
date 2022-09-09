@@ -8,16 +8,17 @@ password = 'LrmsjVJB@8^3'
 
 client = ServiceNowClient(instance, (user, password))
 
+def check_conn():
+    try:
+        query = client.GlideRecord('sys_user')
+        query.get('does not matter') # Really does not matter here
+        # print("Success")
+        return True
+    except exceptions.AuthenticationException as e:
+        # print("Failure")
+        return False
 
-try:
-    gr = client.GlideRecord('sys_user')
-    gr.get('does not matter') # Really does not matter here
-    print("Success")
-except exceptions.AuthenticationException as e:
-    print("Failure")
-
-
-
+check_conn()
 # def check_conn():
 #     instance = 'dev109438'
 #     user = 'admin'
