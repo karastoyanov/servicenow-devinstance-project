@@ -9,7 +9,7 @@ class LoginForm(QWidget):
         super().__init__()
         self.setWindowTitle("ServiceNow Dev Instance Task Verifier")
         self.setWindowIcon(QIcon(r'images\now-mobile-icon.png'))
-        self.resize(500, 320)
+        self.setFixedSize(500, 320)
         self.instance_url()
         self.instance_url_textbox()
         self.user_name()
@@ -23,62 +23,40 @@ class LoginForm(QWidget):
     def instance_url(self):
         url_label = QLabel("ServiceNow Instance URL address", self)
         url_label.setText("ServiceNow Instance URL address")
-        font = QFontDatabase.addApplicationFont(r'fonts\Helvetica Neue.otf')
-        font_families = QFontDatabase.applicationFontFamilies(font)
-        url_label.setFont(QFont(font_families[0], 8))
-        url_label.setGeometry(110, 1, 260, 40)      
+        url_label.setGeometry(10, 1, 260, 40)      
     
     def user_name(self):
         user_name_label = QLabel("User Name", self)
-        user_name_label.setText("User Name")
-        font = QFontDatabase.addApplicationFont(r'fonts\Helvetica Neue.otf')
-        font_families = QFontDatabase.applicationFontFamilies(font)
-        user_name_label.setFont(QFont(font_families[0], 8))
-        user_name_label.setGeometry(200, 70, 100, 40)
+        user_name_label.setText("ServiceNow Instance User Name")
+        user_name_label.setGeometry(10, 70, 200, 40)
     
     def user_password(self):
         user_password_label = QLabel("User Password", self)
-        user_password_label.setText("User Password")
-        font = QFontDatabase.addApplicationFont(r'fonts\Helvetica Neue.otf')
-        font_families = QFontDatabase.applicationFontFamilies(font)
-        user_password_label.setFont(QFont(font_families[0], 8))
-        user_password_label.setGeometry(190, 150, 120, 40)
+        user_password_label.setText("ServiceNow Instance Password")
+        user_password_label.setGeometry(10, 150, 200, 40)
 
     def instance_url_textbox(self):
         instance_url_line_edit = QLineEdit(self)
-        font = QFontDatabase.addApplicationFont(r'fonts\Helvetica Neue.otf')
-        font_families = QFontDatabase.applicationFontFamilies(font)
-        instance_url_line_edit.setFont(QFont(font_families[0], 8))
-        instance_url_line_edit.setGeometry(109, 30, 258, 30)
+        instance_url_line_edit.setGeometry(220, 5, 258, 30)
         return instance_url_line_edit.text()
     
     def user_name_textbox(self):
         user_name_line_edit = QLineEdit(self)
-        font = QFontDatabase.addApplicationFont(r'fonts\Helvetica Neue.otf')
-        font_families = QFontDatabase.applicationFontFamilies(font)
-        user_name_line_edit.setFont(QFont(font_families[0], 8))
-        user_name_line_edit.setGeometry(155, 100, 180, 40)
+        user_name_line_edit.setGeometry(220, 75, 258, 30)
 
     def password_textbox(self):
         password_line_edit = QLineEdit(self)
-        font = QFontDatabase.addApplicationFont(r'fonts\Helvetica Neue.otf')
-        font_families = QFontDatabase.applicationFontFamilies(font)
-        password_line_edit.setFont(QFont(font_families[0], 8))
-        password_line_edit.setGeometry(155, 180, 180, 40)
+        password_line_edit.setGeometry(220, 152, 258, 30)
         
     def login_button(self):
         login_button = QPushButton(self)
         login_button.setText("Login")
-        # login_button.clicked.connect(check_conn())
         login_button.setGeometry(200, 240, 100, 50)
         
     def license(self):
         license = QLabel(self)
         license.setText("GNU General Public License v3.0")
-        font = QFontDatabase.addApplicationFont(r'fonts\Helvetica Neue.otf')
-        font_families = QFontDatabase.applicationFontFamilies(font)
-        license.setFont(QFont(font_families[0], 8))
-        license.setGeometry(250, 290, 300, 40)
+        license.setGeometry(300, 290, 300, 40)
         
 
 

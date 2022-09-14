@@ -22,10 +22,11 @@ class MainForm(QWidget):
         self.task_two_feedback()
         self.task_three_feedback()
         self.show()
+       
         
 
     def task_one(self):
-        task_one_button = QPushButton(self)
+        task_one_button = QPushButton(self, clicked = lambda : self.task_one_verify())
         task_one_button.setText("Verify Task N1")
         task_one_button.setGeometry(10, 10, 150, 40)
     
@@ -33,7 +34,6 @@ class MainForm(QWidget):
         task_one_review_button = QPushButton(self)
         task_one_review_button.setText("Check Task N1")
         task_one_review_button.setGeometry(10, 50, 150, 40)
-        # task_one_review_button.clicked.connect(test_one.verify_task())
 
     def task_two(self):
         task_two_button = QPushButton(self)
@@ -66,6 +66,12 @@ class MainForm(QWidget):
     def task_three_feedback(self):
         task_three_feedback_label = QPushButton(self)
         task_three_feedback_label.setGeometry(200, 290, 40, 40)
+    
+    def task_one_verify(self):
+        if test_one.verify_task() == True:
+            print("Task OK")
+        else:
+            print("Task FAILED")
         
 
 app = QApplication(sys.argv)

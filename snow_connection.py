@@ -1,10 +1,14 @@
 from pysnc import ServiceNowClient, ServiceNowOAuth2
 from pysnc import exceptions
+import login_screen
 
+# instance = 'dev109438'
+# user = 'admin'
+# password = 'LrmsjVJB@8^3'
 
-instance = 'dev109438'
-user = 'admin'
-password = 'LrmsjVJB@8^3'
+instance = login_screen.LoginForm().self.instance_url_line_edit
+user = login_screen.LoginForm().self.user_name_line_edit
+password = login_screen.LoginForm().self.password_line_edit
 
 client = ServiceNowClient(instance, (user, password))
 
