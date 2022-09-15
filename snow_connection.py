@@ -1,64 +1,37 @@
 from pysnc import ServiceNowClient, ServiceNowOAuth2
 from pysnc import exceptions
-import login_screen
 
-# instance = 'dev109438'
-# user = 'admin'
-# password = 'LrmsjVJB@8^3'
 
-instance = login_screen.LoginForm().self.instance_url_line_edit
-user = login_screen.LoginForm().self.user_name_line_edit
-password = login_screen.LoginForm().self.password_line_edit
+instance = 'dev109438'
+user = 'admin'
+password = 'LrmsjVJB@8^3'
+
+# instance = main.LoginForm.instance_url_textbox()
+# user = main.LoginForm.user_name_textbox()
+# password = main.LoginForm.password_textbox()
 
 client = ServiceNowClient(instance, (user, password))
+
+# def check_conn():
+#     query = client.GlideRecord('sys_user')
+#     if query == True:
+#         query.get('does not matter')
+#         print('Login Successfull')
+#         return True
+#     else:
+#         print('Login Failure')
+#         return False
+
 
 def check_conn():
     try:
         query = client.GlideRecord('sys_user')
         query.get('does not matter') # Really does not matter here
-        # print("Success")
+        print("Login Success")
         return True
+        
     except exceptions.AuthenticationException as e:
-        # print("Failure")
+        print("Login Failure")
         return False
 
 check_conn()
-# def check_conn():
-#     instance = 'dev109438'
-#     user = 'admin'
-#     password = 'LrmsjVJB@8^3'
-#     client = ServiceNowClient(instance, (user, password), verify = True)
-#     gr = client.GlideRecord('sys_user')
-#     gr.get('does not matter') # Really does not matter here
-#     if gr.get == True:
-#         print("True")
-#     print("False")
-
-# try:
-#     gr = client.GlideRecord('sys_user')
-#     gr.get('does not matter') # Really does not matter here
-#     print("Login Successfull")
-# except exceptions.AuthenticationException as e:
-#     print("Error during authentication")
-    
-    
-# gr = client.GlideRecord('u_project_verify')
-# # gr.initialize()
-
-# # gr.get('u_description', 'Example Description 1')
-# gr.query()
-# while True:
-#     gr.next()
-#     gr.u_description
-#     gr.get_value('u_description')
-#     gr.get_display_value('u_description')
-#     if gr.get_display_value('u_description') == 'Test':
-#         break
-#     else:
-#         continue
-
-# print(gr.u_description)
-# # gr.u_short_description = "Example Problem 3"
-# # gr.u_description = "Example Discription"
-
-# # gr.insert()

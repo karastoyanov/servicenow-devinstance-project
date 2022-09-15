@@ -1,4 +1,3 @@
-from random import randint
 import sys
 import test_one
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox, QVBoxLayout, QDateEdit)
@@ -6,7 +5,7 @@ from PyQt5.QtGui import (QIcon, QFont, QFontDatabase, QPainter, QPen)
 from PyQt5.QtCore import (QDateTime, QDate, QTime, Qt, QTimer, QSize)
 
 
-class MainForm(QWidget):
+class MainMenu(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("ServiceNow Dev Instance Task Verifier")
@@ -26,7 +25,7 @@ class MainForm(QWidget):
         
 
     def task_one(self):
-        task_one_button = QPushButton(self, clicked = lambda : self.task_one_verify())
+        task_one_button = QPushButton(self)
         task_one_button.setText("Verify Task N1")
         task_one_button.setGeometry(10, 10, 150, 40)
     
@@ -75,7 +74,7 @@ class MainForm(QWidget):
         
 
 app = QApplication(sys.argv)
-win = MainForm()
+win = MainMenu()
 win.show()
 sys.exit(app.exec_())
                            

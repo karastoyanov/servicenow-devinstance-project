@@ -1,4 +1,5 @@
 import sys
+import snow_connection
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox, QVBoxLayout, QDateEdit)
 from PyQt5.QtGui import (QIcon, QFont, QFontDatabase)
 from PyQt5.QtCore import (QDateTime, QDate, QTime, Qt, QTimer, QSize)
@@ -49,7 +50,7 @@ class LoginForm(QWidget):
         password_line_edit.setGeometry(220, 152, 258, 30)
         
     def login_button(self):
-        login_button = QPushButton(self)
+        login_button = QPushButton(self, clicked = lambda : self.open_app())
         login_button.setText("Login")
         login_button.setGeometry(200, 240, 100, 50)
         
@@ -58,8 +59,21 @@ class LoginForm(QWidget):
         license.setText("GNU General Public License v3.0")
         license.setGeometry(300, 290, 300, 40)
         
-
-
+    def open_app(self):
+        if snow_connection.check_conn() == True:
+            pass
+        else:
+            fail_conn = QMessageBox()
+            fail_conn.setIcon(QMessageBox.critical)
+            fail_conn.setText('Error during connection. Check SNOW credentials')
+            fail_conn.setWindowTitle('Authentication Failure')
+            fail_conn.setStandardButtons(QMessageBox.Ok, QMessageBox.Cancel)
+            fail_conn.buttonClicked.connect()
+            return_value = fail_conn.exec_()
+            if return_value == QMessageBox.Cancel:
+                print('Cancel')
+            else:
+                print('OK')
 
 
 
