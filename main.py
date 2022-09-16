@@ -1,8 +1,8 @@
 import snow_connection
 import test_one, test_two
 import sys
-from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox, QVBoxLayout, QDateEdit)
-from PyQt5.QtGui import (QIcon, QFont, QFontDatabase)
+from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox, QVBoxLayout, QPlainTextEdit)
+from PyQt5.QtGui import (QIcon, QFont, QFontDatabase, QPixmap)
 from PyQt5.QtCore import (QDateTime, QDate, QTime, Qt, QTimer, QSize)
 
 
@@ -83,7 +83,7 @@ class MainMenu(QWidget):
         super().__init__()
         self.setWindowTitle("ServiceNow Dev Instance Task Verifier")
         self.setWindowIcon(QIcon(r'images\now-mobile-icon.png'))
-        self.resize(800, 900)
+        self.setFixedSize(800, 900)
         self.task_one()
         self.review_task_one()
         self.task_two()
@@ -103,7 +103,7 @@ class MainMenu(QWidget):
         task_one_button.setGeometry(10, 10, 150, 40)
     
     def review_task_one(self):
-        task_one_review_button = QPushButton(self)
+        task_one_review_button = QPushButton(self, clicked = lambda : self.task_one_description())
         task_one_review_button.setText("Check Task N1")
         task_one_review_button.setGeometry(10, 50, 150, 40)
 
@@ -128,23 +128,54 @@ class MainMenu(QWidget):
         task_three_review_button.setGeometry(10, 330, 150, 40)
         
     def task_one_feedback(self):
-        task_one_feedback_label = QPushButton(self)
+        task_one_feedback_label = QLabel(self)
         task_one_feedback_label.setGeometry(200, 10, 40, 40)
-    
+        waiting = QPixmap(r'images\waiting.png')
+        task_one_feedback_label.setPixmap(waiting)
+        task_one_feedback_label.resize(waiting.width(), waiting.height())
+        
     def task_two_feedback(self):
-        task_two_feedback_label = QPushButton(self)
+        task_two_feedback_label = QLabel(self)
         task_two_feedback_label.setGeometry(200, 150, 40, 40)
-    
+        waiting = QPixmap(r'images\waiting.png')
+        task_two_feedback_label.setPixmap(waiting)
+        task_two_feedback_label.resize(waiting.width(), waiting.height())
+
     def task_three_feedback(self):
-        task_three_feedback_label = QPushButton(self)
+        task_three_feedback_label = QLabel(self)
         task_three_feedback_label.setGeometry(200, 290, 40, 40)
+        waiting = QPixmap(r'images\waiting.png')
+        task_three_feedback_label.setPixmap(waiting)
+        task_three_feedback_label.resize(waiting.width(), waiting.height())
+    
+    def task_one_description(self):
+        task_one_description_label = QPlainTextEdit(self)
+        text = open(r'tasks_description\task_one.txt').read()
+        task_one_description_label.setPlainText(text)
+        task_one_description_label.setGeometry(10, 400, 780, 480)
+        task_one_description_label.show()
+        
+    
     
     def task_one_verify(self):
         if test_one.verify_task() == True:
             print("Task 1 OK")
+            task_one_feedback_label = QLabel(self)
+            task_one_feedback_label.setGeometry(200, 10, 40, 40)
+            check = QPixmap(r'images\check.png')
+            task_one_feedback_label.setPixmap(check)
+            task_one_feedback_label.resize(check.width(), check.height())
+            task_one_feedback_label.show()
         else:
             print("Task 1 FAILED")
+            task_one_feedback_label = QLabel(self)
+            task_one_feedback_label.setGeometry(200, 10, 40, 40)
+            fail = QPixmap(r'images\failure.png')
+            task_one_feedback_label.setPixmap(fail)
+            task_one_feedback_label.resize(fail.width(), fail.height())
+            task_one_feedback_label.show()
 
+   
     def main_menu(self):
         self.w = MainMenu()
         self.w.show()

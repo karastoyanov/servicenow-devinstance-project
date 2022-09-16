@@ -1,5 +1,5 @@
 import snow_connection
-from pysnc import exceptions
+
 
 def verify_task():
     gr = snow_connection.client.GlideRecord('u_project_verify')
@@ -36,8 +36,7 @@ def verify_task():
         pass
     else:
         return False
-    # gr.get('sys_created_on')
-    # print("Success")
+
     return True
 
 
