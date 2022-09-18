@@ -44,35 +44,36 @@ def verify_task():
         # IMPORTANT NOTE: Use "in" instead of "==" to check if the email address is set properly in the SNOW Instance \
             # using if gr.get_display_value("email") == "john.doe@example.com" will not work\
                 # (it works only for pre-defined records in sys_user table)
-        if gr.get_display_value("email") in "john.doe@example.com": 
+        if gr.get_display_value("email") in "john.doe@example.com":
             print("Task 2: Email is found")
             is_found_email = True
             break
         else:
             continue
-    
+        
+    # IMPORTANT NOTE: New GlideRecord client should be created to request a query to sys_user_group table    
+    gr_two = snow_connection.client.GlideRecord("sys_user_group")
+    gr_two.get("name")
+    gr_two.query()
+    gr_two.next()
+    is_found_user = False
+    while gr_two.next():
+        gr_two.state
+        gr_two.get_value("name")
+        gr_two.get_display_value("name")
+        if "Task 2 Project Verify" in gr_two.get_display_value("name"):
+            print(f'Task 2: Table {gr_two.get_display_value("name")} is found')
+            
+
+            
+           
+        
     if is_found_f_name and is_found_l_name and is_found_email:
         print("Task 2: All found")
         return True
     else:
         return False
-    # gr.get('sys_user_group')
-    # gr.query()
-    # gr.next()
-    # gr.state
-    # gr.get_value('name')
-    # gr.get_display_value('name')
-    # if gr.get_display_value('name') == 'Service Desk':
-    #     gr.get('sys_user_group.sys_user_grmember.group_list')
-    #     gr.query()
-    #     gr.next()
-    #     gr.state
-    #     gr.get_value('sys_user_grmember.group_list')
-    #     gr.get_display_value('sys_user_grmember.group_list')
-    #     if gr.get_display_value('sys_user_grmember.group_list') == 'John Doe':
-    #         pass
-    #     else:
-    #         return False
+
     
 verify_task()
 

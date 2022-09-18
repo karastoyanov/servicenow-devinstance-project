@@ -1,5 +1,5 @@
 import snow_connection
-import test_one, test_two
+import test_one
 import sys
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox, QVBoxLayout, QPlainTextEdit)
 from PyQt5.QtGui import (QIcon, QFont, QFontDatabase, QPixmap)
@@ -94,6 +94,7 @@ class MainMenu(QWidget):
         self.task_two_feedback()
         self.task_three_feedback()
         self.show()
+        self.contribuite()
        
         
 
@@ -152,10 +153,19 @@ class MainMenu(QWidget):
         task_one_description_label = QPlainTextEdit(self)
         text = open(r'tasks_description\task_one.txt').read()
         task_one_description_label.setPlainText(text)
-        task_one_description_label.setGeometry(10, 400, 780, 480)
+        task_one_description_label.setGeometry(10, 400, 780, 400)
         task_one_description_label.show()
         
-    
+    def contribuite(self):
+        contribute = QLabel(self)
+        github_image = QPixmap(r'images\github.png')
+        contribute.setPixmap(github_image) 
+        contribute.setGeometry(750, 850, 50, 50)
+        url_link = "<a href =\"https://github.com/karastoyanov/servicenow-devinstance-project\"</a>"
+        contribute.setOpenExternalLinks(self, True)
+        contribute.show()
+        
+        
     
     def task_one_verify(self):
         if test_one.verify_task() == True:
