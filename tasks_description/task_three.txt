@@ -1,0 +1,9 @@
+### Task Three ###
+
+1. Create a new discovery schedule:
+ - Set "Name" to "Test Schedule"
+ - Set "Discover" to "Configuration items"
+ - Set "Run" to "Weekly"
+ - Set "Day of the week" as "Monday"
+
+2. #TO DO add IP Range

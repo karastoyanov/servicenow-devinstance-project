@@ -1,9 +1,9 @@
 import snow_connection
-import test_one
+import test_one, test_two, test_three
 import sys
-from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox, QVBoxLayout, QPlainTextEdit)
-from PyQt5.QtGui import (QIcon, QFont, QFontDatabase, QPixmap)
-from PyQt5.QtCore import (QDateTime, QDate, QTime, Qt, QTimer, QSize)
+from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QMessageBox, QPlainTextEdit)
+from PyQt5.QtGui import (QIcon, QPixmap)
+
 
 
 
@@ -94,47 +94,54 @@ class MainMenu(QWidget):
         self.task_two_feedback()
         self.task_three_feedback()
         self.show()
-        self.contribuite()
+        
        
         
-
+    # Creates button to verify Task One
     def task_one(self):
         task_one_button = QPushButton(self,  clicked = lambda : self.task_one_verify())
         task_one_button.setText("Verify Task N1")
         task_one_button.setGeometry(10, 10, 150, 40)
-    
+   
+    # Creates button to check Task One assignments
     def review_task_one(self):
         task_one_review_button = QPushButton(self, clicked = lambda : self.task_one_description())
         task_one_review_button.setText("Check Task N1")
         task_one_review_button.setGeometry(10, 50, 150, 40)
 
+    # Creates button to verify Task Two
     def task_two(self):
-        task_two_button = QPushButton(self)
+        task_two_button = QPushButton(self, clicked = lambda : self.task_two_verify())
         task_two_button.setText("Verify Task N2")
         task_two_button.setGeometry(10, 150, 150, 40)
 
+    # Creates button to check Task Two assignments
     def review_task_two(self):
-        task_two_review_button = QPushButton(self)
+        task_two_review_button = QPushButton(self, clicked = lambda : self.task_two_description())
         task_two_review_button.setText("Check Task N2")
         task_two_review_button.setGeometry(10, 190, 150, 40)
 
+    # Creates button to check Task Three
     def task_three(self):
-        task_three_button = QPushButton(self)
+        task_three_button = QPushButton(self, clicked = lambda : self.task_three_verify())
         task_three_button.setText("Verify Task N3")
         task_three_button.setGeometry(10, 290, 150, 40)
 
+    # Creates button to check Three
     def review_task_three(self):
-        task_three_review_button = QPushButton(self)
+        task_three_review_button = QPushButton(self, clicked = lambda : self.task_three_description())
         task_three_review_button.setText("Check Task N3")
         task_three_review_button.setGeometry(10, 330, 150, 40)
-        
+    
+    # Default icon to display Task One Status    
     def task_one_feedback(self):
         task_one_feedback_label = QLabel(self)
         task_one_feedback_label.setGeometry(200, 10, 40, 40)
         waiting = QPixmap(r'images\waiting.png')
         task_one_feedback_label.setPixmap(waiting)
         task_one_feedback_label.resize(waiting.width(), waiting.height())
-        
+    
+    # Default icon to display Task Two Status    
     def task_two_feedback(self):
         task_two_feedback_label = QLabel(self)
         task_two_feedback_label.setGeometry(200, 150, 40, 40)
@@ -142,6 +149,7 @@ class MainMenu(QWidget):
         task_two_feedback_label.setPixmap(waiting)
         task_two_feedback_label.resize(waiting.width(), waiting.height())
 
+    # Default icon to display Task Three Status
     def task_three_feedback(self):
         task_three_feedback_label = QLabel(self)
         task_three_feedback_label.setGeometry(200, 290, 40, 40)
@@ -149,27 +157,33 @@ class MainMenu(QWidget):
         task_three_feedback_label.setPixmap(waiting)
         task_three_feedback_label.resize(waiting.width(), waiting.height())
     
+    # Creates separate label to display Task One assignments
     def task_one_description(self):
         task_one_description_label = QPlainTextEdit(self)
-        text = open(r'tasks_description\task_one.txt').read()
-        task_one_description_label.setPlainText(text)
+        text_task_one = open(r'tasks_description\task_one.txt').read()
+        task_one_description_label.setPlainText(text_task_one)
         task_one_description_label.setGeometry(10, 400, 780, 400)
         task_one_description_label.show()
-        
-    def contribuite(self):
-        contribute = QLabel(self)
-        github_image = QPixmap(r'images\github.png')
-        contribute.setPixmap(github_image) 
-        contribute.setGeometry(750, 850, 50, 50)
-        url_link = "<a href =\"https://github.com/karastoyanov/servicenow-devinstance-project\"</a>"
-        contribute.setOpenExternalLinks(self, True)
-        contribute.show()
-        
-        
     
+    # Creates separate label to display Task Two assignments
+    def task_two_description(self):
+        task_two_description_label = QPlainTextEdit(self)
+        text_task_two = open(r'tasks_description\task_two.txt').read()
+        task_two_description_label.setPlainText(text_task_two)
+        task_two_description_label.setGeometry(10, 400, 780, 400)
+        task_two_description_label.show()
+    
+    def task_three_description(self):
+        task_three_description_label = QPlainTextEdit(self)
+        text_task_three = open(r'tasks_description\task_three.txt').read()
+        task_three_description_label.setPlainText(text_task_three)
+        task_three_description_label.setGeometry(10, 400, 780, 400)
+        task_three_description_label.show()
+         
+    # Function that verifies Task One
     def task_one_verify(self):
         if test_one.verify_task() == True:
-            print("Task 1 OK")
+            print("Task 1 OK\n")
             task_one_feedback_label = QLabel(self)
             task_one_feedback_label.setGeometry(200, 10, 40, 40)
             check = QPixmap(r'images\check.png')
@@ -177,15 +191,54 @@ class MainMenu(QWidget):
             task_one_feedback_label.resize(check.width(), check.height())
             task_one_feedback_label.show()
         else:
-            print("Task 1 FAILED")
+            print("Task 1 FAILED\n")
             task_one_feedback_label = QLabel(self)
             task_one_feedback_label.setGeometry(200, 10, 40, 40)
             fail = QPixmap(r'images\failure.png')
             task_one_feedback_label.setPixmap(fail)
             task_one_feedback_label.resize(fail.width(), fail.height())
             task_one_feedback_label.show()
-
-   
+    
+    # Function that verifies Task Two
+    def task_two_verify(self):
+        if test_two.verify_task() == True:
+            print("Task 2 OK\n")
+            task_two_feedback_label = QLabel(self)
+            task_two_feedback_label.setGeometry(200, 150, 40, 40)
+            check = QPixmap(r'images\check.png')
+            task_two_feedback_label.setPixmap(check)
+            task_two_feedback_label.resize(check.width(), check.height())
+            task_two_feedback_label.show()
+        else:
+            print("Task 2 FAILED\n")
+            task_two_feedback_label = QLabel(self)
+            task_two_feedback_label.setGeometry(200, 150, 40, 40)
+            fail = QPixmap(r'images\fail.png')
+            task_two_feedback_label.setPixmap(fail)
+            task_two_feedback_label.resize(fail.width(), fail.height())
+            task_two_feedback_label.show()
+            
+    # Function that verifies Task Three
+    def task_three_verify(self):
+        if test_three.verify_task() == True:
+            print("Task 3 OK\n")
+            task_three_feedback_label = QLabel(self)
+            task_three_feedback_label.setGeometry(200, 290, 40, 40)
+            check = QPixmap(r'images\check.png')
+            task_three_feedback_label.setPixmap(check)
+            task_three_feedback_label.resize(check.width(), check.height())
+            task_three_feedback_label.show()
+        else:
+            print("Task 2 FAILED\n")
+            task_three_feedback_label = QLabel(self)
+            task_three_feedback_label.setGeometry(200, 290, 40, 40)
+            fail = QPixmap(r'images\fail.png')
+            task_three_feedback_label.setPixmap(fail)
+            task_three_feedback_label.resize(fail.width(), fail.height())
+            task_three_feedback_label.show()
+    
+    
+    # Call Main Menu Window
     def main_menu(self):
         self.w = MainMenu()
         self.w.show()

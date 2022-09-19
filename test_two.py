@@ -5,12 +5,8 @@ def verify_task():
     
     gr.get("first_name")
     gr.query()
-    gr.next()
     is_found_f_name = False
     while gr.next():
-        gr.state
-        gr.get_value("first_name")
-        gr.get_display_value("first_name")
         if gr.get_display_value("first_name") == 'John':
             print(f'Task 2: First name is found - {gr.get_display_value("first_name")}')
             is_found_f_name = True
@@ -20,12 +16,8 @@ def verify_task():
     
     gr.get("last_name")
     gr.query()
-    gr.next()
     is_found_l_name = False
     while gr.next():
-        gr.state
-        gr.get_value("last_name")
-        gr.get_display_value("last_name")
         if gr.get_display_value("last_name") == "Doe":
             print(f'Task 2: Last name is found - {gr.get_display_value("last_name")}')
             is_found_l_name = True
@@ -35,12 +27,8 @@ def verify_task():
 
     gr.get("email")
     gr.query()
-    gr.next()
     is_found_email = False
     while gr.next():
-        gr.state
-        gr.get_value("email")
-        gr.get_display_value("email")
         # IMPORTANT NOTE: Use "in" instead of "==" to check if the email address is set properly in the SNOW Instance \
             # using if gr.get_display_value("email") == "john.doe@example.com" will not work\
                 # (it works only for pre-defined records in sys_user table)
@@ -55,25 +43,29 @@ def verify_task():
     gr_two = snow_connection.client.GlideRecord("sys_user_group")
     gr_two.get("name")
     gr_two.query()
-    gr_two.next()
     is_found_user = False
     while gr_two.next():
-        gr_two.state
-        gr_two.get_value("name")
-        gr_two.get_display_value("name")
-        if "Task 2 Project Verify" in gr_two.get_display_value("name"):
+        if "Test Group" in gr_two.get_display_value("name"):
             print(f'Task 2: Table {gr_two.get_display_value("name")} is found')
-            
-
-            
-           
+            # Table sys_user_grmember stores the mapping of user and group. New GlideRecord client should be created
+            gr_three = snow_connection.client.GlideRecord("sys_user_grmember")
+            gr_three.fields = 'group, user'
+            gr_three.query()
+            while gr_three.next():
+                gr_three.serialize()
+                if gr_three.get_display_value("user") == "John Doe" and gr_three.get_display_value("group") == "Test Group":
+                    is_found_user = True
+                    print(f'Task 2: User <{gr_three.get_display_value("user")}> is member of Group <{gr_three.get_display_value("group")}>')
+                    break
         
-    if is_found_f_name and is_found_l_name and is_found_email:
-        print("Task 2: All found")
+    
+    if is_found_f_name and is_found_l_name and is_found_email and is_found_user:
+        print("Task 2: All found\n")
         return True
     else:
         return False
 
-    
-verify_task()
+
+# Uncomment for debugging purposes only
+# verify_task()
 

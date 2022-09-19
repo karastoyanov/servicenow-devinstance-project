@@ -5,11 +5,8 @@ def verify_task():
     gr = snow_connection.client.GlideRecord("u_project_verify")
     gr.get("u_description")
     gr.query()
-    gr.next()
     is_description_found = False
     for r in gr:
-        gr.state
-        gr.get_value("u_description")
         gr.get_display_value("u_description")
         if "Test Task 1" in gr.get_display_value("u_description"):
             print(f'Task 1: Field <Description> with value {gr.get_value("u_description")} found')
@@ -21,11 +18,8 @@ def verify_task():
     gr = snow_connection.client.GlideRecord("u_project_verify")
     gr.get("u_short_description")
     gr.query()
-    gr.next()
     is_short_description_found = False
     for r in gr:
-        gr.state
-        gr.get_value("u_short_description")
         gr.get_display_value("u_short_description")
         if gr.get_display_value("u_short_description") == 'Test 1':
             print(f'Task 1: Field <Short description> with value {gr.get_display_value("u_short_description")} found')
@@ -37,11 +31,8 @@ def verify_task():
     gr = snow_connection.client.GlideRecord("u_project_verify")
     gr.get('u_assigned_to')
     gr.query()
-    gr.next()
     is_assigned_to_found = False
     for r in gr:
-        gr.state
-        gr.get_value('u_assigned_to')
         gr.get_display_value('u_assigned_to')
         if gr.get_display_value('u_assigned_to') == 'Jason Roy':
             print(f'Task 1: Field <Assigned to> with value' \
@@ -52,11 +43,11 @@ def verify_task():
             continue
 
     if is_description_found and is_short_description_found and is_assigned_to_found:
-        print("Task 1: All found")
+        print("Task 1: All found\n")
         return True
     else:
         return False
         
 
-
-verify_task()
+# Uncomment for debugging purposes only
+# verify_task()

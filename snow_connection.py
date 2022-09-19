@@ -12,17 +12,6 @@ password = 'LrmsjVJB@8^3'
 
 client = ServiceNowClient(instance, (user, password))
 
-# def check_conn():
-#     query = client.GlideRecord('sys_user')
-#     if query == True:
-#         query.get('does not matter')
-#         print('Login Successfull')
-#         return True
-#     else:
-#         print('Login Failure')
-#         return False
-
-
 def check_conn():
     try:
         query = client.GlideRecord('sys_user')
@@ -34,4 +23,6 @@ def check_conn():
         print("Login Failure")
         return False
 
-check_conn()
+
+# Uncomment for debugging purposes only
+# check_conn()
