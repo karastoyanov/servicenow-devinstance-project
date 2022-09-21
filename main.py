@@ -1,6 +1,6 @@
 import snow_connection
 import test_one, test_two, test_three
-import sys
+import sys, os
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QMessageBox, QPlainTextEdit)
 from PyQt5.QtGui import (QIcon, QPixmap)
 
@@ -249,3 +249,5 @@ if __name__ == "__main__":
     win = LoginForm()
     win.show()
     app.exec_()
+    
+application_path = os.path.dirname(sys.executable)

@@ -1,6 +1,6 @@
 from pysnc import ServiceNowClient, ServiceNowOAuth2
 from pysnc import exceptions
-
+import sys, os
 
 instance = 'dev109438'
 user = 'admin'
@@ -26,3 +26,5 @@ def check_conn():
 
 # Uncomment for debugging purposes only
 # check_conn()
+
+application_path = os.path.dirname(sys.executable)
