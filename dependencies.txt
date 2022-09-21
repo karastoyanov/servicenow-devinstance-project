@@ -1,7 +1,0 @@
-# pyqt5 --> pip install pyqt5
-# pyqt5-tools --> pip install pyqt5-tools
-# pysnc --> pip install pysnc
-
-https://docs.servicenow.com/bundle/sandiego-application-development/page/integrate/examples/concept/c_PythonWebServicesClientExamples.html
-https://github.com/ServiceNow/PySNC
-
