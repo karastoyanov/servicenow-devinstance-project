@@ -20,6 +20,12 @@ ServiceNow Task Verifier gives the opportunity to verify premade tasks on Servic
 * [PySNC](https://github.com/ServiceNow/PySNC)
 * [PySNC Documentation](https://servicenow.github.io/PySNC/)
 * [PyQt5 Python Library for Qt Framework](https://doc.qt.io/qtforpython/)
+</br>
+:warning: To install all the required python libraries you can run 
+
+```
+pip install -r REQUIREMENTS.md
+```
 
 ### Usage :question:
 * On the main application window you will find buttons for each of the tasks. Each task have two separate buttons, one to verify the task and the second one to review the task assigment. The user DOESN'T have the possibility to change any of the CMDB values or objects through the application. The ServiceNow Task Verifier would give only the chance to verify if specific table or records is existing.
