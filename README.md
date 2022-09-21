@@ -24,7 +24,7 @@ ServiceNow Task Verifier gives the opportunity to verify premade tasks on Servic
 :warning: To install all the required python libraries you can run 
 
 ```
-pip install -r REQUIREMENTS.md
+pip install -r REQUIREMENTS
 ```
 
 ### Usage :question:
