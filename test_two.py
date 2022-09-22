@@ -1,8 +1,10 @@
-import snow_connection
+# import snow_connection
 import sys, os
+import main
 
 def verify_task():
-    gr = snow_connection.client.GlideRecord("sys_user")
+    # gr = snow_connection.client.GlideRecord("sys_user")
+    gr = main.LoginForm.snow_connection.client.GlideRecord("sys_user")
     
     gr.get("first_name")
     gr.query()
@@ -41,7 +43,8 @@ def verify_task():
             continue
         
     # IMPORTANT NOTE: New GlideRecord client should be created to request a query to sys_user_group table    
-    gr_two = snow_connection.client.GlideRecord("sys_user_group")
+    # gr_two = snow_connection.client.GlideRecord("sys_user_group")
+    gr_two = main.LoginForm.snow_connection.client.GlideRecord("sys_user_group")
     gr_two.get("name")
     gr_two.query()
     is_found_user = False
@@ -49,7 +52,8 @@ def verify_task():
         if "Test Group" in gr_two.get_display_value("name"):
             print(f'Task 2: Table {gr_two.get_display_value("name")} is found')
             # Table sys_user_grmember stores the mapping of user and group. New GlideRecord client should be created
-            gr_three = snow_connection.client.GlideRecord("sys_user_grmember")
+            # gr_three = snow_connection.client.GlideRecord("sys_user_grmember")
+            gr_three = main.LoginForm.snow_connection.client.GlideRecord("sys_yser_grmember")
             gr_three.fields = 'group, user'
             gr_three.query()
             while gr_three.next():

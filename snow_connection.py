@@ -1,14 +1,15 @@
 from pysnc import ServiceNowClient, ServiceNowOAuth2
 from pysnc import exceptions
 import sys, os
+import main
 
-instance = 'dev109438'
-user = 'admin'
-password = 'LrmsjVJB@8^3'
+# instance = 'dev109438'
+# user = 'admin'
+# password = 'LrmsjVJB@8^3'
 
-# instance = main.LoginForm.instance_url_textbox()
-# user = main.LoginForm.user_name_textbox()
-# password = main.LoginForm.password_textbox()
+instance = main.LoginForm.instance_url_textbox()
+user = main.LoginForm.user_name_textbox()
+password = main.LoginForm.password_textbox()
 
 client = ServiceNowClient(instance, (user, password))
 
@@ -23,6 +24,11 @@ def check_conn():
         print("Login Failure")
         return False
 
+if __name__ == "__snow_connection__":
+    app = main.QApplication(sys.argv)
+    win = main.LoginForm()
+    win.show()
+    app.exec_()
 
 # Uncomment for debugging purposes only
 # check_conn()

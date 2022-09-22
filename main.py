@@ -1,11 +1,9 @@
-import snow_connection
 import test_one, test_two, test_three
 import sys, os
+from pysnc import ServiceNowClient, ServiceNowOAuth2
+from pysnc import exceptions
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QMessageBox, QPlainTextEdit)
 from PyQt5.QtGui import (QIcon, QPixmap)
-
-
-
 
 class LoginForm(QWidget):
     def __init__(self):
@@ -13,59 +11,66 @@ class LoginForm(QWidget):
         self.setWindowTitle("ServiceNow Dev Instance Task Verifier")
         self.setWindowIcon(QIcon(r'images\now-mobile-icon.png'))
         self.setFixedSize(500, 320)
-        self.instance_url()
-        self.instance_url_textbox()
-        self.user_name()
-        self.user_name_textbox()
-        self.user_password()
-        self.password_textbox()
-        self.login_button()
-        self.license()
-        self.show()
-
-    def instance_url(self):
-        url_label = QLabel("ServiceNow Instance URL address", self)
-        url_label.setText("ServiceNow Instance URL address")
-        url_label.setGeometry(10, 1, 260, 40)      
-    
-    def user_name(self):
-        user_name_label = QLabel("User Name", self)
-        user_name_label.setText("ServiceNow Instance User Name")
-        user_name_label.setGeometry(10, 70, 200, 40)
-    
-    def user_password(self):
-        user_password_label = QLabel("User Password", self)
-        user_password_label.setText("ServiceNow Instance Password")
-        user_password_label.setGeometry(10, 150, 200, 40)
-
-    def instance_url_textbox(self):
-        instance_url_line_edit = QLineEdit(self)
-        instance_url_line_edit.setGeometry(220, 5, 258, 30)
-        return instance_url_line_edit.text()
-    
-    def user_name_textbox(self):
-        user_name_line_edit = QLineEdit(self)
-        user_name_line_edit.setGeometry(220, 75, 258, 30)
-
-    def password_textbox(self):
-        password_line_edit = QLineEdit(self)
-        password_line_edit.setGeometry(220, 152, 258, 30)
         
-    def login_button(self):
-        login_button = QPushButton(self, clicked = lambda : self.open_app())
-        login_button.setText("Login")
-        login_button.setGeometry(200, 240, 100, 50)
+        self.url_label = QLabel("ServiceNow Instance URL address", self)
+        self.url_label.setText("ServiceNow Instance URL address")
+        self.url_label.setGeometry(10, 1, 260, 40)
+        self.url_label.show()
         
-    def license(self):
-        license = QLabel(self)
-        license.setText("GNU General Public License v3.0")
-        license.setGeometry(300, 290, 300, 40)
+        self.instance_url_line_edit = QLineEdit(self)
+        self.instance_url_line_edit.setGeometry(220, 5, 258, 30)
+        self.instance_url_line_edit.show()
         
+        self.user_name_label = QLabel("User Name", self)
+        self.user_name_label.setText("ServiceNow Instance User Name")
+        self.user_name_label.setGeometry(10, 70, 200, 40)
+        self.user_name_label.show()
+        
+        self.user_name_line_edit = QLineEdit(self)
+        self.user_name_line_edit.setGeometry(220, 75, 258, 30)
+        self.user_name_line_edit.show()
+        
+        self.password_line_edit = QLineEdit(self)
+        self.password_line_edit.setGeometry(220, 152, 258, 30)
+        self.password_line_edit.setEchoMode(QLineEdit.EchoMode.Password)
+        self.password_line_edit.show()
+        
+        self.user_password_label = QLabel("User Password", self)
+        self.user_password_label.setText("ServiceNow Instance Password")
+        self.user_password_label.setGeometry(10, 150, 200, 40)
+        self.user_password_label.show()
+        
+        self.login_button = QPushButton(self, clicked = lambda : self.open_app())
+        self.login_button.setText("Login")
+        self.login_button.setGeometry(200, 240, 100, 50)
+        self.login_button.show()
+        
+        self.license = QLabel(self)
+        self.license.setText("GNU General Public License v3.0")
+        self.license.setGeometry(300, 290, 300, 40)
+        self.license.show()
+    
+    def snow_connection(self):
+        instance = self.instance_url_line_edit.text()
+        user = self.user_name_line_edit.text()
+        password = self.password_line_edit.text()
+        client = ServiceNowClient(instance, (user, password))
+        try:
+            query = client.GlideRecord('sys_user')
+            query.get('does not matter')
+            print('Login Successfull')
+            return True
+        except exceptions.AuthenticationException as e:
+            print('Login Failure')
+            return False
+        finally:
+            return False
+    
     def open_app(self):
-        if snow_connection.check_conn() == True:
+        if LoginForm.snow_connection(self):
             print('Login Successfull')
             MainMenu.main_menu(self)
-        elif snow_connection.check_conn is False:
+        else:
             fail_conn = QMessageBox()
             # fail_conn.setIcon(QMessageBox.information)
             fail_conn.setText('Error during connection. Check SNOW credentials')

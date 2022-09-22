@@ -1,8 +1,10 @@
-import snow_connection
+# import snow_connection
 import sys, os
+import main
 
 def verify_task():
-    gr = snow_connection.client.GlideRecord("u_project_verify")
+    # gr = snow_connection.client.GlideRecord("u_project_verify")
+    gr = main.LoginForm.snow_connection.client.GlideRecord("u_project_verify")
     gr.get("u_description")
     gr.query()
     is_description_found = False
@@ -15,7 +17,8 @@ def verify_task():
         else:
             continue
 
-    gr = snow_connection.client.GlideRecord("u_project_verify")
+    # gr = snow_connection.client.GlideRecord("u_project_verify")
+    gr = main.LoginForm.snow_connection.client.GlideRecord("u_project_verify")
     gr.get("u_short_description")
     gr.query()
     is_short_description_found = False
@@ -28,7 +31,8 @@ def verify_task():
         else:
             continue
         
-    gr = snow_connection.client.GlideRecord("u_project_verify")
+    # gr = snow_connection.client.GlideRecord("u_project_verify")
+    gr = main.LoginForm.snow_connection.client.GlideRecord("u_project_verify")
     gr.get('u_assigned_to')
     gr.query()
     is_assigned_to_found = False
