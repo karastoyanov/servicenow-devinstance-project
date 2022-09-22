@@ -1,7 +1,6 @@
 import test_one, test_two, test_three
 import sys, os
-from pysnc import ServiceNowClient, ServiceNowOAuth2
-from pysnc import exceptions
+from pysnc import ServiceNowClient
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QMessageBox, QPlainTextEdit)
 from PyQt5.QtGui import (QIcon, QPixmap)
 
@@ -55,34 +54,28 @@ class LoginForm(QWidget):
         user = self.user_name_line_edit.text()
         password = self.password_line_edit.text()
         client = ServiceNowClient(instance, (user, password))
+    
         try:
             query = client.GlideRecord('sys_user')
             query.get('does not matter')
             print('Login Successfull')
             return True
-        except exceptions.AuthenticationException as e:
+        except:
             print('Login Failure')
-            return False
-        finally:
             return False
     
     def open_app(self):
-        if LoginForm.snow_connection(self):
+        if LoginForm.snow_connection(self) == True:
             print('Login Successfull')
             MainMenu.main_menu(self)
         else:
             fail_conn = QMessageBox()
-            # fail_conn.setIcon(QMessageBox.information)
-            fail_conn.setText('Error during connection. Check SNOW credentials')
+            fail_conn.setIcon(QMessageBox.Warning)
+            fail_conn.setText('Error connecting to ServiceNow Instance. Please check the credentials.\nIMPORTANT: ServiceNow Instance'\
+                ' should be UP and RUNNING')
             fail_conn.setWindowTitle('Authentication Failure')
-            fail_conn.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-            # fail_conn.buttonClicked.connect()
-            return_value = fail_conn.exec_()
-            if return_value == QMessageBox.Cancel:
-                print('Cancel')
-            else:
-                print('OK')
-
+            fail_conn.setStandardButtons(QMessageBox.Ok)
+            fail_conn.exec_()
 class MainMenu(QWidget):
     def __init__(self):
         super().__init__()

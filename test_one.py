@@ -2,9 +2,10 @@
 import sys, os
 import main
 
+
 def verify_task():
     # gr = snow_connection.client.GlideRecord("u_project_verify")
-    gr = main.LoginForm.snow_connection.client.GlideRecord("u_project_verify")
+    gr = main.LoginForm.snow_connection().client.GlideRecord("u_project_verify")
     gr.get("u_description")
     gr.query()
     is_description_found = False
@@ -54,5 +55,5 @@ def verify_task():
         
 
 # Uncomment for debugging purposes only
-# verify_task()
+verify_task()
 application_path = os.path.dirname(sys.executable)
