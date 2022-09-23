@@ -1,11 +1,15 @@
-# import snow_connection
+from pysnc import ServiceNowClient, ServiceNowOAuth2
+from pysnc import exceptions
 import sys, os
-import main
+
 
 
 def verify_task():
+    from main import LoginForm
+    LoginForm.snow_connection()
     # gr = snow_connection.client.GlideRecord("u_project_verify")
-    gr = main.LoginForm.snow_connection().client.GlideRecord("u_project_verify")
+    # gr = main.LoginForm.snow_connection().client.GlideRecord("u_project_verify")
+    gr = LoginForm.snow_connection().client.GlideRecord("u_project_verify")
     gr.get("u_description")
     gr.query()
     is_description_found = False

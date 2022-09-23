@@ -29,8 +29,3 @@ if __name__ == "__snow_connection__":
     win = main.LoginForm()
     win.show()
     app.exec_()
-
-# Uncomment for debugging purposes only
-# check_conn()
-
-application_path = os.path.dirname(sys.executable)

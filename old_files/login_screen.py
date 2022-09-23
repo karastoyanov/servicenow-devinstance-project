@@ -1,5 +1,5 @@
 import sys
-import snow_connection
+import conn
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox, QVBoxLayout, QDateEdit)
 from PyQt5.QtGui import (QIcon, QFont, QFontDatabase)
 from PyQt5.QtCore import (QDateTime, QDate, QTime, Qt, QTimer, QSize)
@@ -60,7 +60,7 @@ class LoginForm(QWidget):
         license.setGeometry(300, 290, 300, 40)
         
     def open_app(self):
-        if snow_connection.check_conn() == True:
+        if conn.check_conn() == True:
             pass
         else:
             fail_conn = QMessageBox()

@@ -1,6 +1,7 @@
-import test_one, test_two, test_three
+# import test_one, test_two, test_three
+from distutils.log import Log
 import sys, os
-from pysnc import ServiceNowClient
+from pysnc import ServiceNowClient, ServiceNowOAuth2
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QMessageBox, QPlainTextEdit)
 from PyQt5.QtGui import (QIcon, QPixmap)
 
@@ -53,6 +54,7 @@ class LoginForm(QWidget):
         instance = self.instance_url_line_edit.text()
         user = self.user_name_line_edit.text()
         password = self.password_line_edit.text()
+        
         client = ServiceNowClient(instance, (user, password))
     
         try:
@@ -180,6 +182,7 @@ class MainMenu(QWidget):
          
     # Function that verifies Task One
     def task_one_verify(self):
+        from test_one import test_one
         if test_one.verify_task() == True:
             print("Task 1 OK\n")
             task_one_feedback_label = QLabel(self)
@@ -199,7 +202,8 @@ class MainMenu(QWidget):
     
     # Function that verifies Task Two
     def task_two_verify(self):
-        if test_two.verify_task() == True:
+        from test_two import verify_task
+        if verify_task() == True:
             print("Task 2 OK\n")
             task_two_feedback_label = QLabel(self)
             task_two_feedback_label.setGeometry(200, 150, 40, 40)
@@ -218,7 +222,8 @@ class MainMenu(QWidget):
             
     # Function that verifies Task Three
     def task_three_verify(self):
-        if test_three.verify_task() == True:
+        from test_three import verify_task
+        if verify_task() == True:
             print("Task 3 OK\n")
             task_three_feedback_label = QLabel(self)
             task_three_feedback_label.setGeometry(200, 290, 40, 40)
