@@ -6,7 +6,7 @@ import sys, os
 
 def verify_task():
     from main import LoginForm
-    LoginForm.snow_connection()
+    
     # gr = snow_connection.client.GlideRecord("u_project_verify")
     # gr = main.LoginForm.snow_connection().client.GlideRecord("u_project_verify")
     gr = LoginForm.snow_connection().client.GlideRecord("u_project_verify")
