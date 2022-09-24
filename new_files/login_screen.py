@@ -1,9 +1,7 @@
-import sys
-from snow_connection import check_conn
-from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox, QVBoxLayout, QDateEdit)
-from PyQt5.QtGui import (QIcon, QFont, QFontDatabase)
-from PyQt5.QtCore import (QDateTime, QDate, QTime, Qt, QTimer, QSize)
-
+import sys, os
+from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QMessageBox, QPlainTextEdit)
+from PyQt5.QtGui import (QIcon, QPixmap)
+import main_menu
 
 class LoginForm(QWidget):
     def __init__(self):
@@ -49,11 +47,18 @@ class LoginForm(QWidget):
         self.license.setText("GNU General Public License v3.0")
         self.license.setGeometry(300, 290, 300, 40)
         self.license.show()
+
+        self.get_instance = self.instance_url_line_edit.text()
+        self.get_user = self.user_name_line_edit.text()
+        self.get_pass = self.password_line_edit.text()
     
     def open_app(self):
-        if check_conn == True:
+        import snow_connection
+        if snow_connection.check_conn(self.instance_url_line_edit.text(), self.user_name_line_edit.text(), self.password_line_edit.text()) == True:
             print('Login Successfull')
-            # MainMenu.main_menu(self)
+            win2 = main_menu.MainMenu()
+            win2.show()
+            win.hide()
         else:
             fail_conn = QMessageBox()
             fail_conn.setIcon(QMessageBox.Warning)
@@ -64,10 +69,10 @@ class LoginForm(QWidget):
             fail_conn.exec_()
 
 
-
-
-app = QApplication(sys.argv)
-win = LoginForm()
-win.show()
-sys.exit(app.exec_())
-                           
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    win = LoginForm()
+    win.show()
+    app.exec_()
+    
+application_path = os.path.dirname(sys.executable)

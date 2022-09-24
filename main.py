@@ -1,5 +1,4 @@
 # import test_one, test_two, test_three
-from distutils.log import Log
 import sys, os
 from pysnc import ServiceNowClient, ServiceNowOAuth2
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QMessageBox, QPlainTextEdit)
@@ -54,23 +53,23 @@ class LoginForm(QWidget):
         instance = self.instance_url_line_edit.text()
         user = self.user_name_line_edit.text()
         password = self.password_line_edit.text()
-        
         client = ServiceNowClient(instance, (user, password))
-    
         try:
             query = client.GlideRecord('sys_user')
             query.get('does not matter')
-            is_connected = True
             print('Login Successfull')
-            return True
+            is_conn = True
         except:
             print('Login Failure')
-            is_connected = False
-            return False
+            is_conn = False
+        self.us_list = []
+        self.us_list.append(client)
+        self.us_list.append(is_conn)
+        return self.us_list
 
     
     def open_app(self):
-        if LoginForm.snow_connection(self) == True:
+        if LoginForm.snow_connection(self)[1] == True:
             print('Login Successfull')
             MainMenu.main_menu(self)
         else:
@@ -81,6 +80,7 @@ class LoginForm(QWidget):
             fail_conn.setWindowTitle('Authentication Failure')
             fail_conn.setStandardButtons(QMessageBox.Ok)
             fail_conn.exec_()
+            
 class MainMenu(QWidget):
     def __init__(self):
         super().__init__()
@@ -98,7 +98,6 @@ class MainMenu(QWidget):
         self.task_three_feedback()
         self.show()
         
-       
         
     # Creates button to verify Task One
     def task_one(self):
@@ -185,8 +184,8 @@ class MainMenu(QWidget):
          
     # Function that verifies Task One
     def task_one_verify(self):
-        from test_one import test_one
-        if test_one.verify_task() == True:
+        from test_one import verify_task
+        if verify_task(LoginForm.snow_connection(self)[0]) == True:
             print("Task 1 OK\n")
             task_one_feedback_label = QLabel(self)
             task_one_feedback_label.setGeometry(200, 10, 40, 40)
@@ -249,6 +248,8 @@ class MainMenu(QWidget):
         self.w = MainMenu()
         self.w.show()
         self.hide()
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

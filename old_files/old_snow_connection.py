@@ -1,15 +1,16 @@
 from pysnc import ServiceNowClient, ServiceNowOAuth2
+from PyQt5.QtWidgets import QApplication
 from pysnc import exceptions
 import sys, os
+from login_screen import LoginForm
 
+instance = LoginForm().instance_url_line_edit.text()
+user = LoginForm().user_name_line_edit.text()
+password = LoginForm().password_line_edit.text()
 
-# instance = 'dev109438'
-# user = 'admin'
-# password = 'LrmsjVJB@8^3'
-
-instance = LoginForm.snow_connection().instance()
-user = LoginForm.snow_connection().user
-password = LoginForm.snow_connection().password
+# instance = "dev109438"
+# user = "admin"
+# password = "LrmsjVJB@8^3"
 
 client = ServiceNowClient(instance, (user, password))
 
@@ -23,5 +24,9 @@ def check_conn():
     except exceptions.AuthenticationException as e:
         print("Login Failure")
         return False
+    
+    
+app = QApplication([])   
+k = LoginForm()
 
 check_conn()
