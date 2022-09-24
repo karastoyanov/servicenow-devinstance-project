@@ -1,9 +1,11 @@
 import sys, os
-from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QMessageBox, QPlainTextEdit)
+from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QMessageBox, QPlainTextEdit, QDialog)
 from PyQt5.QtGui import (QIcon, QPixmap)
+from pysnc import ServiceNowClient, ServiceNowOAuth2
+from pysnc import exceptions
 import main_menu
 
-class LoginForm(QWidget):
+class LoginForm(QDialog):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("ServiceNow Dev Instance Task Verifier")
@@ -48,18 +50,26 @@ class LoginForm(QWidget):
         self.license.setGeometry(300, 290, 300, 40)
         self.license.show()
 
-        self.get_instance = self.instance_url_line_edit.text()
-        self.get_user = self.user_name_line_edit.text()
-        self.get_pass = self.password_line_edit.text()
-    
     def open_app(self):
-        import snow_connection
-        if snow_connection.check_conn(self.instance_url_line_edit.text(), self.user_name_line_edit.text(), self.password_line_edit.text()) == True:
-            print('Login Successfull')
+        instance = self.instance_url_line_edit.text()
+        user = self.user_name_line_edit.text()
+        password = self.password_line_edit.text()
+        with open(r'credentials.txt', 'w') as f:
+            f.write(instance + '\n')
+            f.write(user + '\n')
+            f.write(password + '\n')
+            f.close()
+        client = ServiceNowClient(instance, (user, password))
+        try:
+            query = client.GlideRecord('sys_user')
+            query.get('does not matter') # Really does not matter here
+            print("Connection Function Login Success")
             win2 = main_menu.MainMenu()
             win2.show()
             win.hide()
-        else:
+            return client
+        except:
+            print("Connection Function Login Failure")
             fail_conn = QMessageBox()
             fail_conn.setIcon(QMessageBox.Warning)
             fail_conn.setText('Error connecting to ServiceNow Instance. Please check the credentials.\nIMPORTANT: ServiceNow Instance'\
@@ -69,10 +79,11 @@ class LoginForm(QWidget):
             fail_conn.exec_()
 
 
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     win = LoginForm()
     win.show()
     app.exec_()
-    
+    os.remove(r'credentials.txt')
 application_path = os.path.dirname(sys.executable)

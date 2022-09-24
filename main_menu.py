@@ -11,7 +11,6 @@ class MainMenu(QWidget):
         self.setFixedSize(800, 900)
         self.show()
         
-        
         # Creates button to verify Task One
         self.task_one_button = QPushButton(self,  clicked = lambda : self.task_one_verify())
         self.task_one_button.setText("Verify Task N1")
@@ -96,7 +95,7 @@ class MainMenu(QWidget):
     # Function that verifies Task One
     def task_one_verify(self):
         from test_one import verify_task
-        if verify_task == True:
+        if verify_task() == True:
             print("Task 1 OK\n")
             task_one_feedback_label = QLabel(self)
             task_one_feedback_label.setGeometry(200, 10, 40, 40)

@@ -1,13 +1,11 @@
 import sys, os
-from pysnc import ServiceNowClient, ServiceNowOAuth2
-from PyQt5.QtWidgets import QWidget, QApplication
-from main import LoginForm
+from pysnc import ServiceNowClient
+from PyQt5.QtWidgets import QApplication
+import snow_connection
 
 def verify_task():
-    # k.snow_connection(LoginForm.snow_connection[0])
-    # gr = snow_connection.client.GlideRecord("u_project_verify")
-    # gr = main.LoginForm.snow_connection().client.GlideRecord("u_project_verify")
-    gr = cl.GlideRecord("u_project_verify")
+
+    gr = snow_connection.client.GlideRecord("u_project_verify")
     gr.get("u_description")
     gr.query()
     is_description_found = False
@@ -21,7 +19,7 @@ def verify_task():
             continue
 
     # gr = snow_connection.client.GlideRecord("u_project_verify")
-    gr = k.client.GlideRecord("u_project_verify")
+    gr = snow_connection.client.GlideRecord("u_project_verify")
     gr.get("u_short_description")
     gr.query()
     is_short_description_found = False
@@ -35,7 +33,7 @@ def verify_task():
             continue
         
     # gr = snow_connection.client.GlideRecord("u_project_verify")
-    gr = k.client.GlideRecord("u_project_verify")
+    gr = snow_connection.client.GlideRecord("u_project_verify")
     gr.get('u_assigned_to')
     gr.query()
     is_assigned_to_found = False
@@ -50,15 +48,11 @@ def verify_task():
             continue
 
     if is_description_found and is_short_description_found and is_assigned_to_found:
-        print("Task 1: All found\n")
+        print("Task 1: All found")
         return True
     else:
         return False
 
-
-app = QApplication([])
-k = LoginForm()
-k.snow_connection()
 # Uncomment for debugging purposes only
 # verify_task()
 application_path = os.path.dirname(sys.executable)

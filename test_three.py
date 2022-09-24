@@ -1,11 +1,9 @@
 # import snow_connection
 import sys, os
-import main
+import snow_connection
 
 def verify_task():
-    
-    # gr = snow_connection.client.GlideRecord("discovery_schedule")
-    gr = main.LoginForm.snow_connection.client.GlideRecord("discovery_schedule")
+    gr = snow_connection.client.GlideRecord("discovery_schedule")
     gr.get("sys_name")
     gr.query()
     is_found_name = False
@@ -17,8 +15,7 @@ def verify_task():
             print(f'Task 3: Discovery Schedule <{gr.get_display_value("sys_name")}> found.')
             break
         
-    # gr = snow_connection.client.GlideRecord("discovery_schedule")
-    gr = main.LoginForm.snow_connection.client.GlideRecord("discovery_schedule")
+    gr = snow_connection.client.GlideRecord("discovery_schedule")
     gr.get("discover")
     gr.query()
     is_found_discover = False
@@ -28,8 +25,7 @@ def verify_task():
             print(f'Task 3: Discovery schedule is set to discover CIs')
             break
     
-    # gr = snow_connection.client.GlideRecord("discovery_schedule")
-    gr = main.LoginForm.snow_connection.client.GlideRecord("discovery_schedule")
+    gr = snow_connection.client.GlideRecord("discovery_schedule")
     gr.get("disco_run_type")
     gr.query()
     is_found_run_type = False
@@ -39,8 +35,8 @@ def verify_task():
             is_found_run_type = True
             break
             
-    # gr = snow_connection.client.GlideRecord("discovery_schedule")
-    gr = main.LoginForm.snow_connection.client.GlideRecord("discovery_schedule")       
+
+    gr = snow_connection.client.GlideRecord("discovery_schedule")       
     gr.get("run_dayofweek")
     gr.query()
     is_found_day = False

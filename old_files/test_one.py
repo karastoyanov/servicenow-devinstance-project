@@ -1,12 +1,13 @@
 import sys, os
-from snow_connection import check_conn
+from pysnc import ServiceNowClient, ServiceNowOAuth2
+from PyQt5.QtWidgets import QWidget, QApplication
+from main import LoginForm
 
 def verify_task():
-    check_conn()
     # k.snow_connection(LoginForm.snow_connection[0])
     # gr = snow_connection.client.GlideRecord("u_project_verify")
     # gr = main.LoginForm.snow_connection().client.GlideRecord("u_project_verify")
-    gr = check_conn.client.GlideRecord("u_project_verify")
+    gr = cl.GlideRecord("u_project_verify")
     gr.get("u_description")
     gr.query()
     is_description_found = False
@@ -55,7 +56,9 @@ def verify_task():
         return False
 
 
-
+app = QApplication([])
+k = LoginForm()
+k.snow_connection()
 # Uncomment for debugging purposes only
-verify_task()
+# verify_task()
 application_path = os.path.dirname(sys.executable)
