@@ -86,4 +86,5 @@ if __name__ == "__main__":
     win.show()
     app.exec_()
     os.remove(r'credentials.txt')
+    
 application_path = os.path.dirname(sys.executable)

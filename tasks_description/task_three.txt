@@ -6,4 +6,8 @@
  - Set "Run" to "Weekly"
  - Set "Day of the week" as "Monday"
 
-2. #TO DO add IP Range
+2. Create a new IP range:
+ - Set "Name" to "Test IP Range"
+ - Set the newly created IP range to "Test Schedule" Discovery Schedule
+ - Set "Start IP Address" to "192.168.0.1"
+ - Set "End IP Address" to "192.168.0.100"

@@ -51,7 +51,6 @@ def verify_task():
         if "Test Group" in gr_two.get_display_value("name"):
             print(f'Task 2: Table {gr_two.get_display_value("name")} is found')
             # Table sys_user_grmember stores the mapping of user and group. New GlideRecord client should be created
-            # gr_three = snow_connection.client.GlideRecord("sys_user_grmember")
             gr_three = snow_connection.client.GlideRecord("sys_user_grmember")
             gr_three.fields = 'group, user'
             gr_three.query()

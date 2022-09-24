@@ -18,7 +18,6 @@ def verify_task():
         else:
             continue
 
-    # gr = snow_connection.client.GlideRecord("u_project_verify")
     gr = snow_connection.client.GlideRecord("u_project_verify")
     gr.get("u_short_description")
     gr.query()
@@ -32,7 +31,6 @@ def verify_task():
         else:
             continue
         
-    # gr = snow_connection.client.GlideRecord("u_project_verify")
     gr = snow_connection.client.GlideRecord("u_project_verify")
     gr.get('u_assigned_to')
     gr.query()
