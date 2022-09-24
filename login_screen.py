@@ -57,7 +57,7 @@ class LoginForm(QDialog):
         with open(r'credentials.txt', 'w') as f:
             f.write(instance + '\n')
             f.write(user + '\n')
-            f.write(password + '\n')
+            f.write(password)
             f.close()
         client = ServiceNowClient(instance, (user, password))
         try:

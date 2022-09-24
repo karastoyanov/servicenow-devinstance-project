@@ -12,7 +12,7 @@ with open(r'credentials.txt') as f:
     for line in contents:
         instance = contents[0][0:-1]
         user = contents[1][0:-1]
-        password = contents[2][0:-1]
+        password = contents[2]
         break
 client = ServiceNowClient(instance, (user, password))    
 
