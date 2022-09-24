@@ -60,11 +60,14 @@ class LoginForm(QWidget):
         try:
             query = client.GlideRecord('sys_user')
             query.get('does not matter')
+            is_connected = True
             print('Login Successfull')
             return True
         except:
             print('Login Failure')
+            is_connected = False
             return False
+
     
     def open_app(self):
         if LoginForm.snow_connection(self) == True:
