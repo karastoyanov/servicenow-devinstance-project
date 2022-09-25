@@ -16,9 +16,9 @@ class MainMenu(QWidget):
         self.task_one_button.setText("Verify Task N1")
         self.task_one_button.setGeometry(10, 10, 150, 40)
         self.task_one_button.show()
-   
+
         # Creates button to check Task One assignments
-        self.task_one_review_button = QPushButton(self, clicked = lambda : self.task_one_description_label.show())
+        self.task_one_review_button = QPushButton(self, clicked = lambda : self.task_one_description())
         self.task_one_review_button.setText("Check Task N1")
         self.task_one_review_button.setGeometry(10, 50, 150, 40)
         self.task_one_review_button.show()
@@ -30,7 +30,7 @@ class MainMenu(QWidget):
         self.task_two_button.show()
         
         # Creates button to check Task Two assignments
-        self.task_two_review_button = QPushButton(self, clicked = lambda : self.task_two_description_label.show())
+        self.task_two_review_button = QPushButton(self, clicked = lambda : self.task_two_description())
         self.task_two_review_button.setText("Check Task N2")
         self.task_two_review_button.setGeometry(10, 190, 150, 40)
         self.task_two_review_button.show()
@@ -42,7 +42,7 @@ class MainMenu(QWidget):
         self.task_three_button.show()
         
         # Creates button to check Three
-        self.task_three_review_button = QPushButton(self, clicked = lambda : self.task_three_description_label.show())
+        self.task_three_review_button = QPushButton(self, clicked = lambda : self.task_three_description())
         self.task_three_review_button.setText("Check Task N3")
         self.task_three_review_button.setGeometry(10, 330, 150, 40)
         self.task_three_review_button.show()
@@ -71,26 +71,32 @@ class MainMenu(QWidget):
         self.task_three_feedback_label.resize(waiting.width(), waiting.height())
         self.task_three_feedback_label.show()
         
+    def task_one_description(self):  
         # Creates separate label to display Task One assignments
         self.task_one_description_label = QPlainTextEdit(self)
         self.text_task_one = open(r'tasks_description\task_one.txt').read()
         self.task_one_description_label.setPlainText(self.text_task_one)
+        self.task_one_description_label.setReadOnly(True)
         self.task_one_description_label.setGeometry(10, 400, 780, 400)
-        # self.self.task_one_description_label.show()
-    
+        self.task_one_description_label.show()
+
+    def task_two_description(self):
         # Creates separate label to display Task Two assignments
         self.task_two_description_label = QPlainTextEdit(self)
         self.text_task_two = open(r'tasks_description\task_two.txt').read()
         self.task_two_description_label.setPlainText(self.text_task_two)
+        self.task_two_description_label.setReadOnly(True)
         self.task_two_description_label.setGeometry(10, 400, 780, 400)
-        # self.task_two_description_label.show()
-    
+        self.task_two_description_label.show()
+
+    def task_three_description(self):
         # Creates separate label to display Task Three assignments
         self.task_three_description_label = QPlainTextEdit(self)
         self.text_task_three = open(r'tasks_description\task_three.txt').read()
         self.task_three_description_label.setPlainText(self.text_task_three)
+        self.task_three_description_label.setReadOnly(True)
         self.task_three_description_label.setGeometry(10, 400, 780, 400)
-        # self.task_three_description_label.show()
+        self.task_three_description_label.show()
          
     # Function that verifies Task One
     def task_one_verify(self):

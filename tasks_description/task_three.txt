@@ -11,3 +11,5 @@
  - Set the newly created IP range to "Test Schedule" Discovery Schedule
  - Set "Start IP Address" to "192.168.0.1"
  - Set "End IP Address" to "192.168.0.100"
+
+ Click Verify
