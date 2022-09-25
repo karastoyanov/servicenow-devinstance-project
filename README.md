@@ -31,10 +31,11 @@ pip install -r REQUIREMENTS
 * After you open the apllication, the first screen you will see is the login form. You should provide the credentials for your ServiceNow instance. To get the credentials open the [Developer Portal](https://developer.servicenow.com/) and login with your account. Then, go to the upper right corner, open your profile and click on "Manage instance password". You should be seeing a similar window
 <p align="center">
   <img src="https://github.com/karastoyanov/servicenow-devinstance-project/blob/main/images/ServiceNow%20Instance/Credentials.png" width="500" title="ServiceNow Task Verifier Main Page">
-  </p>
-* - ServiceNow Instance Name: Only the instance name in format devXXXXXX
-* - ServiceNow User Name: Your instance user name
-* - ServiceNow Password: Your instance user password
+</p>
+
+- ServiceNow Instance Name: Only the instance name in format ```devXXXXXX``` </br>
+- ServiceNow User Name: Your instance username </br>
+- ServiceNow Password: Your instance user password </br>
 * After you introduce the credentials press the "Login" button. If the credentials are correct, you will sign in the application succsefully. In case that credentials are incorrect, a prompt message will appeat. Keep in mind that to be able to log in, your ServiceNow instance should be running(awake). 
 * On the main application window you will find buttons for each of the tasks. Each task have two separate buttons, one to verify the task and the second one to review the task assigment. The user DOESN'T have the possibility to change any of the CMDB values or objects through the application. The ServiceNow Task Verifier would give only the chance to verify if specific table or records is existing.
 
