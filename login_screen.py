@@ -1,19 +1,18 @@
 import sys, os
-from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QMessageBox, QPlainTextEdit, QDialog)
-from PyQt5.QtGui import (QIcon, QPixmap)
+from PyQt5.QtWidgets import (QApplication, QPushButton, QLabel, QLineEdit, QMessageBox, QDialog)
+from PyQt5.QtGui import (QIcon)
 from pysnc import ServiceNowClient, ServiceNowOAuth2
-from pysnc import exceptions
 import main_menu
 
 class LoginForm(QDialog):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("ServiceNow Dev Instance Task Verifier")
+        self.setWindowTitle("ServiceNow Instance Task Verifier")
         self.setWindowIcon(QIcon(r'images\now-mobile-icon.png'))
         self.setFixedSize(500, 320)
         
-        self.url_label = QLabel("ServiceNow Instance URL address", self)
-        self.url_label.setText("ServiceNow Instance URL address")
+        self.url_label = QLabel("ServiceNow Instance Name", self)
+        self.url_label.setText("ServiceNow Instance Name")
         self.url_label.setGeometry(10, 1, 260, 40)
         self.url_label.show()
         
