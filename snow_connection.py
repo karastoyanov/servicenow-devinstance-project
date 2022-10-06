@@ -1,7 +1,5 @@
-from pysnc import ServiceNowClient, ServiceNowOAuth2
-from pysnc import exceptions
-from PyQt5.QtWidgets import QApplication
-import sys, os
+from pysnc import ServiceNowClient
+
 
 # instance = "dev109438"
 # user = "admin"

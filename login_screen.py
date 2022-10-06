@@ -1,7 +1,7 @@
 import sys, os
 from PyQt5.QtWidgets import (QApplication, QPushButton, QLabel, QLineEdit, QMessageBox, QDialog)
 from PyQt5.QtGui import (QIcon)
-from pysnc import ServiceNowClient, ServiceNowOAuth2
+from pysnc import ServiceNowClient
 import main_menu
 
 class LoginForm(QDialog):
