@@ -1,4 +1,3 @@
-# import snow_connection
 import sys, os
 import snow_connection
 

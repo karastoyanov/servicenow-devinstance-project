@@ -1,10 +1,5 @@
 from pysnc import ServiceNowClient
 
-
-# instance = "dev109438"
-# user = "admin"
-# password = "LrmsjVJB@8^3"
-
 with open(r'credentials.txt') as f:
     contents = f.readlines()
     for line in contents:
