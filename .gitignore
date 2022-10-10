@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 example.html
+node_modules
+package-lock.json

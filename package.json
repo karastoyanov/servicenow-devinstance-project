@@ -1,0 +1,24 @@
+{
+  "name": "servicenow-devinstance-project",
+  "version": "1.0.0",
+  "description": "<details>\r   <summary>Table of Contents</summary>\r   <ol>\r \t<li><a href=\"#about-the-project\">About The Project</a></li>\r     <li><a href=\"#built-with\">Built With</a></li>\r     <li><a href=\"#usage\">Usage</a></li>\r     <li><a href=\"#contributing\">Contributing</a></li>\r     <li><a href=\"#license\">License</a></li>\r     <li><a href=\"#contact\">Contact</a></li>\r   </ol>\r </details>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karastoyanov/servicenow-devinstance-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karastoyanov/servicenow-devinstance-project/issues"
+  },
+  "homepage": "https://github.com/karastoyanov/servicenow-devinstance-project#readme",
+  "dependencies": {
+    "lit-html": "^2.4.0",
+    "page": "^1.11.6"
+  }
+}
