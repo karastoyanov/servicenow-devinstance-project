@@ -1,5 +1,7 @@
-import {render, html} from './lib.js'
-const loginPageTemplate = () => html`
+import { credentials } from './app.js';
+import { render, html } from './lib.js'
+
+const loginPageTemplate = (onSubmit) => html`
 
 <section class="login">
     <div class="color-spliter">
@@ -12,7 +14,7 @@ const loginPageTemplate = () => html`
             <img src="./img/js.png" alt=""> -->
             <!-- <img src="./img/DIW-logo.png" alt=""> -->
         </div>
-        <form id="login">
+        <form @submit=${(event) => onSubmit(event)} id="login">
             
             <div class="container">
   
@@ -37,5 +39,36 @@ const loginPageTemplate = () => html`
 export async function loginPage(ctx) {
 
   console.log('loginPage')
-ctx.render(loginPageTemplate());
+  ctx.render(loginPageTemplate(onSubmit));
+
+  async function onSubmit(e) {
+    e.preventDefault()
+    console.log(credentials)
+  
+    console.log('click')
+    let instanceName = document.querySelector('#instanceName').value.trim()
+    let instanceUserName = document.querySelector('#instanceUserName').value.trim()
+    let instancePassword = document.querySelector('#instance-password').value.trim()
+
+    // Check for empty fields.
+if(instanceName.length == 0 || instanceUserName.length == 0 || instancePassword.length == 0){
+alert('All fields are required!')
+}
+// All fields are filled up!
+else{
+  credentials.instName = instanceName;
+  credentials.instUserName = instanceUserName;
+  credentials.instPassword = instancePassword;
+  console.log(credentials)
+
+  // ----- API call to SN with Credentials. Return true or false!
+  //  IF we got True 
+  // ctx.redirect("/tasks")
+  // -----------------------
+  //  IF we got False - > Some Error will display
+}
+   
+
+  }
+
 }

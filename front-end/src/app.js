@@ -10,6 +10,11 @@ console.log('hello')
 
 
 const root = document.querySelector('.main-content')
+ export const credentials ={
+   instName:'',
+   instUserName:'',
+   instPassword:''
+ };
 page(decoration)
 page('/',loginPage)
 
