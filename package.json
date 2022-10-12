@@ -19,6 +19,7 @@
   "homepage": "https://github.com/karastoyanov/servicenow-devinstance-project#readme",
   "dependencies": {
     "lit-html": "^2.4.0",
-    "page": "^1.11.6"
+    "page": "^1.11.6",
+    "servicenow-rest-api": "^1.2.2"
   }
 }
