@@ -1,5 +1,7 @@
 import { credentials } from './app.js';
 import { render, html } from './lib.js'
+import { snowConnection } from './servicenowConn.js';
+
 
 const loginPageTemplate = (onSubmit) => html`
 
@@ -60,8 +62,9 @@ else{
   credentials.instUserName = instanceUserName;
   credentials.instPassword = instancePassword;
   console.log(credentials)
-
+  await snowConnection(credentials);
   // ----- API call to SN with Credentials. Return true or false!
+
   //  IF we got True 
   // ctx.redirect("/tasks")
   // -----------------------
