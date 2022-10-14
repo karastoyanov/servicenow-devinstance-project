@@ -1,6 +1,8 @@
 import { credentials } from './app.js';
 import { render, html } from './lib.js'
 import { snowConnection } from './servicenowConn.js';
+// import {ServiceNow} from './lib/servicenow copy.js'
+// import { snowConnection } from './servicenowConn.js';
 
 
 const loginPageTemplate = (onSubmit) => html`
@@ -46,32 +48,46 @@ export async function loginPage(ctx) {
   async function onSubmit(e) {
     e.preventDefault()
     console.log(credentials)
-  
+
     console.log('click')
     let instanceName = document.querySelector('#instanceName').value.trim()
     let instanceUserName = document.querySelector('#instanceUserName').value.trim()
     let instancePassword = document.querySelector('#instance-password').value.trim()
 
     // Check for empty fields.
-if(instanceName.length == 0 || instanceUserName.length == 0 || instancePassword.length == 0){
-alert('All fields are required!')
-}
-// All fields are filled up!
-else{
-  credentials.instName = instanceName;
-  credentials.instUserName = instanceUserName;
-  credentials.instPassword = instancePassword;
-  console.log(credentials)
-  await snowConnection(credentials);
-  // ----- API call to SN with Credentials. Return true or false!
+    if (instanceName.length == 0 || instanceUserName.length == 0 || instancePassword.length == 0) {
+      alert('All fields are required!')
+    }
+    // All fields are filled up!
+    else {
+      credentials.instName = instanceName;
+      credentials.instUserName = instanceUserName;
+      credentials.instPassword = instancePassword;
+      console.log(credentials)
+      // await snowConnection(credentials);
+      // ----- API call to SN with Credentials. Return true or false!
 
-  //  IF we got True 
-  // ctx.redirect("/tasks")
-  // -----------------------
-  //  IF we got False - > Some Error will display
-}
-   
+      // const sn = require("servicenow-rest-api");
+
+      await snowConnection(instanceName,instanceUserName,instancePassword)
+
+  // const serviceNow = new ServiceNow(credentials.instName, credentials.instUserName, credentials.instPassword);
+
+      //   const ServiceNow = new sn("dev109438", "admin", "LrmsjVJB@8^3");
+       
+      // serviceNow.Authenticate();
+
+      // const connection = serviceNow.Authenticate();
+     
+
+      //  IF we got True 
+      // ctx.redirect("/tasks")
+      // -----------------------
+      //  IF we got False - > Some Error will display
+    }
+
 
   }
 
 }
+// export {serviceNow}
