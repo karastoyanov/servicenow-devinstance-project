@@ -1,6 +1,6 @@
 example.html
 node_modules
 package-lock.json
-./front-end
-./vscode
-./__pycache__
+.front-end
+.vscode
+.__pycache__
