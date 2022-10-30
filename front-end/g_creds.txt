@@ -1,7 +1,0 @@
-Instance name: dev104479
-
-Instance URL: https://dev104479.service-now.com/
-
-Username: admin
-
-Password: !GZGymlrL*09
