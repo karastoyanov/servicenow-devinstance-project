@@ -1,4 +1,4 @@
-# servicenow-devinstance-project
+:warning: :warning: :warning: The entire project was moved to [snow-environment.github.io](https://github.com/snow-environment/snow-environment.github.io) as Web Application
 ## ServiceNow Task Verifier
 
 <details>
